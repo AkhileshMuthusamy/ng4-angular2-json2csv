@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CsvService } from 'angular2-json2csv';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,21 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  jsonData = [
+    {
+      name: 'Akhilesh'
+    }
+  ];
+
+  constructor(private _csvService: CsvService) {}
+
+  downloadCSV() {
+    this.jsonData.push({
+      name: 'Muthusamy'
+    });
+
+    console.log('Converting json into csv');
+    // The data must be array of object
+    this._csvService.download(this.jsonData, 'json2csv');
+  }
 }
